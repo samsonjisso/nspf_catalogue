@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -41,8 +42,27 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-bom:33.13.0")
-    implementation("com.google.firebase:firebase-analytics")
+    val room_version = "2.7.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+    implementation("com.google.firebase:firebase-bom:33.14.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:22.4.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.1.4")
+
+    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+
+// Koin core features
+    implementation("io.insert-koin:koin-android:4.0.4")
+// Koin for Jetpack Compose
+    implementation("io.insert-koin:koin-androidx-compose:4.0.4")
+    // Koin for ViewModel
+    implementation("io.insert-koin:koin-androidx-viewmodel:4.0.4")
+    // Koin for Navigation
+    implementation("io.insert-koin:koin-androidx-navigation:4.0.4")
+    // Koin for WorkManager
+    implementation("io.insert-koin:koin-androidx-workmanager:4.0.4")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
